@@ -1,3 +1,11 @@
+var octave0 = [21, 23, 12, 14, 16, 17, 19];
+
+var pitch2midi = function (pitch) {
+  note = pitch[0].toLowerCase().charCodeAt() - 'a'.charCodeAt();
+  octave = parseInt (pitch[1]);
+  return octave0[note] + octave * 12;
+}
+
 var compile = function (musexpr) {
   var compiled = []
   var compile_inner = function (time, expr) {
@@ -15,7 +23,7 @@ var compile = function (musexpr) {
         break;
       case 'note':
         compiled.push ( 
-          { tag: 'note', pitch: expr.pitch, start: time, dur: expr.dur }
+          { tag: 'note', pitch: pitch2midi(expr.pitch), start: time, dur: expr.dur }
         );
       case 'rest':
         time += expr.dur;
