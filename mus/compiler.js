@@ -19,6 +19,9 @@ var compile = function (musexpr) {
         );
         time += expr.dur;
         break;
+      case 'rest':
+        time += expr.dur;
+        break;
     }
     return time;
   };
@@ -31,7 +34,10 @@ var melody_mus =
     left:
       { tag: 'seq',
         left: { tag: 'note', pitch: 'a4', dur: 250 },
-        right: { tag: 'note', pitch: 'b4', dur: 250 } },
+        right:
+          { tag: 'seq',
+            left: { tag: 'rest', dur: 100 },
+            right: { tag: 'note', pitch: 'b4', dur: 250 } } },
     right:
       { tag: 'seq',
         left: { tag: 'note', pitch: 'c4', dur: 500 },
