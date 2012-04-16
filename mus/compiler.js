@@ -17,8 +17,6 @@ var compile = function (musexpr) {
         compiled.push ( 
           { tag: 'note', pitch: expr.pitch, start: time, dur: expr.dur }
         );
-        time += expr.dur;
-        break;
       case 'rest':
         time += expr.dur;
         break;
