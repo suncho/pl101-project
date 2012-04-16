@@ -15,7 +15,10 @@ var compile = function (musexpr) {
       // Process a single note.
       case 'note':
         compiled.push ( 
-          { tag: 'note', pitch: pitch2midi(expr.pitch), start: time, dur: expr.dur }
+        { tag: 'note', 
+          pitch: pitch2midi(expr.pitch), 
+          start: time, 
+          dur: expr.dur }
         );
         time += expr.dur;
         break;
@@ -42,11 +45,13 @@ var compile = function (musexpr) {
     }
     return time;
   };
-  compile_inner (0, musexpr);  
+  compile_inner (0, musexpr);
   return compiled;
 };
 
 var melody_mus = 
+{ tag: 'par',
+  left:
   { tag: 'seq',
     left:
     { tag: 'seq',
@@ -60,7 +65,19 @@ var melody_mus =
     { tag: 'repeat',
       section: { tag: 'note', pitch: 'c5', dur: 251 }, 
       count: 6 }
-  };
+  },
+  right : 
+  { tag: 'seq',
+    left:
+    { tag: 'repeat',
+      section: { tag: 'note', pitch: 'g2', dur: 123 }, 
+      count: 2 },
+    right:
+    { tag: 'repeat',
+      section: { tag: 'note', pitch: 'f6', dur: 333 }, 
+      count: 5 }
+  }
+};
 
 console.log (melody_mus);
 console.log (compile(melody_mus));
