@@ -12,8 +12,7 @@ var compile = function (musexpr) {
     var time_l, time_r;
 
     switch (expr.tag) {
-      // Process a single note.
-      case 'note':
+      case 'note': // Process a single note.
         compiled.push ( 
         { tag: 'note', 
           pitch: pitch2midi(expr.pitch), 
@@ -22,23 +21,19 @@ var compile = function (musexpr) {
         );
         time += expr.dur;
         break;
-      // Process two mus expressions concurrently.
-      case 'par':
+      case 'par': // Process two mus expressions concurrently.
         time_l = compile_inner (time, expr.left);
         time_r = compile_inner (time, expr.right);
         time = Math.max (time_l, time_r);
         break;
-      // Repeat an expression 'count' times.
-      case 'repeat':
+      case 'repeat': // Repeat an expression 'count' times.
         for (i = expr.count; i > 0; --i)
           time = compile_inner (time, expr.section);
         break;
-      // Play nothing for a duration.
-      case 'rest':
+      case 'rest': // Play nothing for a duration.
         time += expr.dur;
         break;
-      // Process two mus expressions in sequence.
-      case 'seq':
+      case 'seq': // Process two mus expressions in sequence.
         time = compile_inner (time, expr.left);
         time = compile_inner (time, expr.right);
         break;
