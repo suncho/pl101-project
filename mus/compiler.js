@@ -1,6 +1,7 @@
-var octave0 = [21, 23, 12, 14, 16, 17, 19];
-
+// Converts a pitch (e.g. 'c4' into a corresponding MIDI number
 var pitch2midi = function (pitch) {
+  var octave0 = [21, 23, 12, 14, 16, 17, 19];
+
   note = pitch[0].toLowerCase().charCodeAt() - 'a'.charCodeAt();
   octave = parseInt (pitch[1]);
   return octave0[note] + octave * 12;
