@@ -1,0 +1,9 @@
+MUS: Assignment from Lesson 2 -- a compiler for a simple programming langauge called MUS that expresses musical notes and sequences.
+
+I didn't feel like passing around a reference to my array of compiled code, so I just closed over the array with an outer function.
+
+I never really used the endTime function (from the lesson) much. Because compiling required traversing the whole expression anyway, I just kept track of the time as I went.
+
+For MIDI conversion, I calculated the note indices by using character code subtraction. I don't know if that's portable in JavaScript, but i didn't feel like creating a look-up table for it.
+
+Nothing fancy.
